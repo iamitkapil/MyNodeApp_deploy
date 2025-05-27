@@ -1,19 +1,18 @@
-# .github/workflows/promote-dev-to-test.yml
-name: Terraform Deploy to Test
+name: Terraform Deploy to Preprod
 
 on:
   push:
     paths:
-      - env/test/manifest.json
+      - env/preprod/manifest.json
     branches:
       - main
 
 jobs:
   deploy:
-    name: Terraform Deploy to Test
+    name: Terraform Deploy to Preprod
     runs-on: ubuntu-latest
     env:
-      target_env: test
+      target_env: preprod
       aws_region: us-east-1
 
     steps:
@@ -42,12 +41,4 @@ jobs:
         run: npm install -g devopx-cli
 
       - name: Post Deploy to Test
-        run: devopx post-deploy --environment "${{ github.repository }}:test"
-
-  call-promote:
-    name: Promote Test to Preprod
-    uses: ./.github/workflows/promote.yml
-    with:
-      from-env: test
-      to-env: preprod
-      environment: preprod-approval
+        run: devopx post-deploy --environment "${{ github.repository }}:preprod"
