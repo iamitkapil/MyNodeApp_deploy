@@ -1,0 +1,27 @@
+name: Devopx Pipeline
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'devopx-env.json'
+
+jobs:
+  register-environments:
+    name: Register Environments to DynamoDB
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install devopx-cli
+        run: npm install -g devopx-cli
+
+      - name: Run devopx register-environments
+        run: devopx register-environment

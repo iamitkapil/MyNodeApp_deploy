@@ -1,0 +1,34 @@
+{
+    "dev": {
+    "branch": "main",
+    "manifest_path": "env/dev/manifest.json",
+    "is_dev": true,
+    "is_prod": false,
+    "trigger_on_update": false,
+    "promo_source_projects": [],
+    "required_validations": [],
+    "required_environments": []
+    },
+    
+    "test": {
+    "branch": "main",
+    "manifest_path": "env/test/manifest.json",
+    "is_dev": false,
+    "is_prod": false,
+    "trigger_on_update": false,
+    "promo_source_projects": [],
+    "required_validations": [], 
+    "required_environments": [["dev"]]
+    },
+    
+    "preprod": {
+    "branch": "main",
+    "manifest_path": "env/preprod/manifest.json",
+    "is_dev": false,
+    "is_prod": false,
+    "trigger_on_update": false,
+    "promo_source_projects": [],
+    "required_validations": [], 
+    "required_environments": [["dev","test"]]
+    }
+}
