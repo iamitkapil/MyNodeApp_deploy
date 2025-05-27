@@ -1,0 +1,36 @@
+# .github/workflows/promote.yml
+name: Promote Artifacts Reusable
+
+on:
+  workflow_call:
+    inputs:
+      from-env:
+        required: true
+        type: string
+      to-env:
+        required: true
+        type: string
+      environment:
+        required: true
+        type: string
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.environment }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install devopx-cli
+        run: npm install -g devopx-cli
+
+      - name: Promote Artifacts
+        run: devopx promote-artifacts --from-env "${{ github.repository }}:${{ inputs.from-env }}" --to-env "${{ github.repository }}:${{ inputs.to-env }}"

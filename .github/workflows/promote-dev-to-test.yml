@@ -1,0 +1,53 @@
+# .github/workflows/promote-dev-to-test.yml
+name: Terraform Deploy to Dev
+
+on:
+  push:
+    paths:
+      - env/dev/manifest.json
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Terraform Deploy to Dev
+    runs-on: ubuntu-latest
+    env:
+      target_env: dev
+      aws_region: us-east-1
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.6
+
+      - name: Terraform Init
+        run: echo "terraform init"
+
+      - name: Terraform Plan
+        run: echo "terraform plan"
+
+      - name: Terraform Apply
+        run: echo "terraform apply"
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install devopx-cli
+        run: npm install -g devopx-cli
+
+      - name: Post Deploy to Dev
+        run: devopx post-deploy --environment "${{ github.repository }}:dev"
+
+  call-promote:
+    name: Promote Dev to Test
+    uses: ./.github/workflows/promote.yml
+    with:
+      from-env: dev
+      to-env: test
+      environment: test-approval
