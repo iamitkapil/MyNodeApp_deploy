@@ -1,0 +1,22 @@
+{
+  "id": "7cf83d66-e6ae-4253-9d2b-436f81fc3507",
+  "env": "iamitkapil/MyNodeApp_deploy:test",
+  "artifacts": [
+    {
+      "id": "404b5139-2c7b-43c6-be4c-cdff3bb3c4e2",
+      "name": "my-node-app.zip",
+      "type": "lambda",
+      "version": "20250527105306",
+      "sourcerepo": "iamitkapil/MyNodeApp",
+      "path_to_artifactory": "http://34.227.152.1:8081/artifactory/node-app-local/ci-artifact/my-node-app-20250527105306.zip"
+    },
+    {
+      "id": "bb510edd-7366-4593-8a15-ab92a1f6fd81",
+      "name": "terraform.zip",
+      "type": "terraform",
+      "version": "20250527105307",
+      "sourcerepo": "iamitkapil/MyNodeApp",
+      "path_to_artifactory": "http://34.227.152.1:8081/artifactory/node-app-local/ci-artifact/terraform-20250527105307.zip"
+    }
+  ]
+}
